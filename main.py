@@ -14,6 +14,10 @@ LINE = (
 
 
 def main() -> None:
+    # The gate accepts UTF-8 text of 1 to 200 characters, not only
+    # whitespace; fail loudly here rather than shipping a bad entry.
+    assert 1 <= len(LINE) <= 200, f"line is {len(LINE)} chars"
+    assert LINE.strip(), "line must not be only whitespace"
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(LINE)
